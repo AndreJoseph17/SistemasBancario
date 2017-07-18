@@ -1,5 +1,10 @@
+<<<<<<< HEAD:SistemaBancario/src/main/java/com/sistemabancario/model/pojo/Cuenta.java
 package com.sistemabancario.model.pojo;
 // Generated 18/07/2017 16:11:11 by Hibernate Tools 4.3.1
+=======
+package Model;
+// Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1
+>>>>>>> 218c09201e8e3c382f722ec23e62754416b08f1d:SistemaBancario/src/main/java/Model/Cuenta.java
 
 
 import java.util.HashSet;

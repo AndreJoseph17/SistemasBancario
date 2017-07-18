@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="bancodb" name="Model.TransferenciaHasCuenta" optimistic-lock="version" table="transferencia_has_cuenta">
+    <composite-id class="Model.TransferenciaHasCuentaId" name="id">
+      <key-property name="transferenciaIdtransferencia" type="string">
+        <column length="45" name="transferencia_idtransferencia"/>
+      </key-property>
+      <key-property name="cuentaIdcuenta" type="string">
+        <column length="45" name="cuenta_idcuenta"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="Model.Cuenta" fetch="select" insert="false" name="cuenta" update="false">
+      <column length="45" name="cuenta_idcuenta" not-null="true"/>
+    </many-to-one>
+    <property name="idCuentaBeneficiario" type="string">
+      <column length="45" name="id_cuenta_beneficiario"/>
+    </property>
+  </class>
+</hibernate-mapping>
