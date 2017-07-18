@@ -2,15 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="bancodb" name="Model.Servicio" optimistic-lock="version" table="servicio">
+  <class catalog="bancodb" name="com.sistemabancario.model.Servicio" optimistic-lock="version" table="servicio">
     <id name="idservicio" type="string">
       <column length="45" name="idservicio"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="Model.Cuenta" fetch="select" name="cuenta">
+    <many-to-one class="com.sistemabancario.model.Cuenta" fetch="select" name="cuenta">
       <column length="45" name="cuenta_idcuenta" not-null="true"/>
     </many-to-one>
-    <many-to-one class="Model.TipoServicio" fetch="select" name="tipoServicio">
+    <many-to-one class="com.sistemabancario.model.TipoServicio" fetch="select" name="tipoServicio">
       <column name="tipo_servicio_idtipo_servicio" not-null="true"/>
     </many-to-one>
     <property name="detalle" type="string">
@@ -20,7 +20,7 @@
       <key>
         <column length="45" name="servicio_idservicio" not-null="true"/>
       </key>
-      <one-to-many class="Model.Planilla"/>
+      <one-to-many class="com.sistemabancario.model.Planilla"/>
     </set>
   </class>
 </hibernate-mapping>

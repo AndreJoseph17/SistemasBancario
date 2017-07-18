@@ -2,18 +2,18 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="bancodb" name="Model.Transaccion" optimistic-lock="version" table="transaccion">
+  <class catalog="bancodb" name="com.sistemabancario.model.Transaccion" optimistic-lock="version" table="transaccion">
     <id name="idtransaccion" type="string">
       <column length="45" name="idtransaccion"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="Model.Cuenta" fetch="select" name="cuentaByCuentaIdcuenta2">
+    <many-to-one class="com.sistemabancario.model.Cuenta" fetch="select" name="cuentaByCuentaIdcuenta2">
       <column length="45" name="cuenta_idcuenta_2" not-null="true"/>
     </many-to-one>
-    <many-to-one class="Model.Cuenta" fetch="select" name="cuentaByCuentaIdcuentaPrincipal">
+    <many-to-one class="com.sistemabancario.model.Cuenta" fetch="select" name="cuentaByCuentaIdcuentaPrincipal">
       <column length="45" name="cuenta_idcuenta_principal" not-null="true"/>
     </many-to-one>
-    <many-to-one class="Model.TipoTransaccion" fetch="select" name="tipoTransaccion">
+    <many-to-one class="com.sistemabancario.model.TipoTransaccion" fetch="select" name="tipoTransaccion">
       <column name="tipo_transaccion_idtipo_transaccion" not-null="true"/>
     </many-to-one>
     <property name="cantidad" type="double">
@@ -26,7 +26,7 @@
       <key>
         <column length="45" name="transaccion_idtransaccion" not-null="true"/>
       </key>
-      <one-to-many class="Model.Planilla"/>
+      <one-to-many class="com.sistemabancario.model.Planilla"/>
     </set>
   </class>
 </hibernate-mapping>

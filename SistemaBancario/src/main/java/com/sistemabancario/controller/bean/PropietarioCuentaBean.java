@@ -6,7 +6,8 @@
 package com.sistemabancario.controller.bean;
 
 import com.sistemabancario.dao.PropietarioCuentaDAO;
-import com.sistemabancario.model.pojo.PropietarioCuenta;
+import com.sistemabancario.model.PropietarioCuenta;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
@@ -35,7 +36,7 @@ public class PropietarioCuentaBean implements Serializable {
     
     public void agregarPropietario(){
         
-        String Remark = newuser.get
+        //String Remark = newuser.get
     }
     
     /**

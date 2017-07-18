@@ -5,7 +5,7 @@
  */
 package com.sistemabancario.dao;
 
-import com.sistemabancario.model.pojo.PropietarioCuenta;
+import com.sistemabancario.model.PropietarioCuenta;
 import com.sistemabancario.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
