@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2017 16:11:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistemabancario.model.pojo.TipoTransaccion" table="tipo_transaccion" catalog="bancodb" optimistic-lock="version">
+        <id name="idtipoTransaccion" type="java.lang.Integer">
+            <column name="idtipo_transaccion" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" />
+        </property>
+        <set name="transaccions" table="transaccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_transaccion_idtipo_transaccion" not-null="true" />
+            </key>
+            <one-to-many class="com.sistemabancario.model.pojo.Transaccion" />
+        </set>
+    </class>
+</hibernate-mapping>

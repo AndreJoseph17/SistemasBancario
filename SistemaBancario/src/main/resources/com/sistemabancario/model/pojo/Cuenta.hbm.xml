@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2017 16:11:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistemabancario.model.pojo.Cuenta" table="cuenta" catalog="bancodb" optimistic-lock="version">
+        <id name="idcuenta" type="string">
+            <column name="idcuenta" length="45" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="propietarioCuenta" class="com.sistemabancario.model.pojo.PropietarioCuenta" fetch="select">
+            <column name="usuario_idusuario" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoCuenta" class="com.sistemabancario.model.pojo.TipoCuenta" fetch="select">
+            <column name="tipo_cuenta_idtipo_cuenta" not-null="true" />
+        </many-to-one>
+        <property name="saldo" type="java.lang.Double">
+            <column name="saldo" precision="22" scale="0" />
+        </property>
+        <property name="activa" type="java.lang.Boolean">
+            <column name="activa" />
+        </property>
+        <set name="transferenciaHasCuentas" table="transferencia_has_cuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cuenta_idcuenta" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.sistemabancario.model.pojo.TransferenciaHasCuenta" />
+        </set>
+        <set name="transaccionsForCuentaIdcuenta2" table="transaccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cuenta_idcuenta_2" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.sistemabancario.model.pojo.Transaccion" />
+        </set>
+        <set name="servicios" table="servicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cuenta_idcuenta" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.sistemabancario.model.pojo.Servicio" />
+        </set>
+        <set name="transaccionsForCuentaIdcuentaPrincipal" table="transaccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cuenta_idcuenta_principal" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.sistemabancario.model.pojo.Transaccion" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2017 16:11:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistemabancario.model.pojo.Transaccion" table="transaccion" catalog="bancodb" optimistic-lock="version">
+        <id name="idtransaccion" type="string">
+            <column name="idtransaccion" length="45" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentaByCuentaIdcuenta2" class="com.sistemabancario.model.pojo.Cuenta" fetch="select">
+            <column name="cuenta_idcuenta_2" length="45" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentaByCuentaIdcuentaPrincipal" class="com.sistemabancario.model.pojo.Cuenta" fetch="select">
+            <column name="cuenta_idcuenta_principal" length="45" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoTransaccion" class="com.sistemabancario.model.pojo.TipoTransaccion" fetch="select">
+            <column name="tipo_transaccion_idtipo_transaccion" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="double">
+            <column name="cantidad" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="19" not-null="true" />
+        </property>
+        <set name="planillas" table="planilla" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="transaccion_idtransaccion" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.sistemabancario.model.pojo.Planilla" />
+        </set>
+    </class>
+</hibernate-mapping>

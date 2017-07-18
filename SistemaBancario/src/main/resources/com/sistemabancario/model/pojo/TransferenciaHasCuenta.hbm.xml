@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2017 16:11:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistemabancario.model.pojo.TransferenciaHasCuenta" table="transferencia_has_cuenta" catalog="bancodb" optimistic-lock="version">
+        <composite-id name="id" class="com.sistemabancario.model.pojo.TransferenciaHasCuentaId">
+            <key-property name="transferenciaIdtransferencia" type="string">
+                <column name="transferencia_idtransferencia" length="45" />
+            </key-property>
+            <key-property name="cuentaIdcuenta" type="string">
+                <column name="cuenta_idcuenta" length="45" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cuenta" class="com.sistemabancario.model.pojo.Cuenta" update="false" insert="false" fetch="select">
+            <column name="cuenta_idcuenta" length="45" not-null="true" />
+        </many-to-one>
+        <property name="idCuentaBeneficiario" type="string">
+            <column name="id_cuenta_beneficiario" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
