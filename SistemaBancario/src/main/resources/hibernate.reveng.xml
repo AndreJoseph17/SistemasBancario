@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="bancodb"/>
+  <table-filter match-name="cuenta"/>
+  <table-filter match-name="transaccion"/>
+  <table-filter match-name="servicio"/>
+  <table-filter match-name="transferencia_has_cuenta"/>
+  <table-filter match-name="tipo_servicio"/>
+  <table-filter match-name="email"/>
+  <table-filter match-name="tipo_transaccion"/>
+  <table-filter match-name="usuario_has_email"/>
+  <table-filter match-name="propietario_cuenta"/>
+  <table-filter match-name="tipo_cuenta"/>
+  <table-filter match-name="planilla"/>
+  <table-filter match-name="telefono"/>
+</hibernate-reverse-engineering>
