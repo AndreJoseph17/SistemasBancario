@@ -2,12 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="bancodb" name="com.sistemabancario.model.pojo.Telefono" optimistic-lock="version" table="telefono">
+  <class catalog="bancodb" name="Model.Telefono" optimistic-lock="version" table="telefono">
     <id name="idtelefono" type="java.lang.Integer">
       <column name="idtelefono"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="com.sistemabancario.model.pojo.PropietarioCuenta" fetch="select" name="propietarioCuenta">
+    <many-to-one class="Model.PropietarioCuenta" fetch="select" name="propietarioCuenta">
       <column length="10" name="propietario_cuenta_idusuario" not-null="true"/>
     </many-to-one>
     <property name="numero" type="string">

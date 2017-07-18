@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="bancodb" name="com.sistemabancario.model.pojo.PropietarioCuenta" optimistic-lock="version" table="propietario_cuenta">
+  <class catalog="bancodb" name="Model.PropietarioCuenta" optimistic-lock="version" table="propietario_cuenta">
     <id name="idusuario" type="string">
       <column length="10" name="idusuario"/>
       <generator class="assigned"/>
@@ -26,7 +26,7 @@
       <key>
         <column length="10" name="propietario_cuenta_idusuario" not-null="true"/>
       </key>
-      <one-to-many class="com.sistemabancario.model.pojo.Telefono"/>
+      <one-to-many class="Model.Telefono"/>
     </set>
     <set fetch="select" inverse="false" lazy="true" name="emails" table="usuario_has_email">
       <key>
@@ -40,13 +40,13 @@
       <key>
         <column length="10" name="propietario_cuenta_idusuario" not-null="true"/>
       </key>
-      <one-to-many class="com.sistemabancario.model.pojo.Email"/>
+      <one-to-many class="Model.Email"/>
     </set>
     <set fetch="select" inverse="true" lazy="true" name="cuentas" table="cuenta">
       <key>
         <column length="10" name="usuario_idusuario" not-null="true"/>
       </key>
-      <one-to-many class="com.sistemabancario.model.pojo.Cuenta"/>
+      <one-to-many class="Model.Cuenta"/>
     </set>
   </class>
 </hibernate-mapping>

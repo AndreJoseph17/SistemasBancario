@@ -2,15 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="bancodb" name="com.sistemabancario.model.pojo.Planilla" optimistic-lock="version" table="planilla">
+  <class catalog="bancodb" name="Model.Planilla" optimistic-lock="version" table="planilla">
     <id name="idplanilla" type="string">
       <column length="45" name="idplanilla"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="com.sistemabancario.model.pojo.Servicio" fetch="select" name="servicio">
+    <many-to-one class="Model.Servicio" fetch="select" name="servicio">
       <column length="45" name="servicio_idservicio" not-null="true"/>
     </many-to-one>
-    <many-to-one class="com.sistemabancario.model.pojo.Transaccion" fetch="select" name="transaccion">
+    <many-to-one class="Model.Transaccion" fetch="select" name="transaccion">
       <column length="45" name="transaccion_idtransaccion" not-null="true"/>
     </many-to-one>
     <property name="valor" type="java.lang.Double">

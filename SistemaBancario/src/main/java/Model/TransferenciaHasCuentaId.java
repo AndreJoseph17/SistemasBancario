@@ -1,4 +1,4 @@
-package com.sistemabancario.model.pojo;
+package Model;
 // Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1
 
 
