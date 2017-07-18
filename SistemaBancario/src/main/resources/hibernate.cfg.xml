@@ -10,9 +10,16 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="sys/model/Transacion.hbm.xml"/>
-    <mapping resource="sys/model/Asiento.hbm.xml"/>
-    <mapping resource="sys/model/Cuentas.hbm.xml"/>
-    <mapping resource="sys/model/TipoCuenta.hbm.xml"/>
-    </session-factory>
+    <mapping resource="com/sistemabancario/dao/Email.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/TransferenciaHasCuenta.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/TipoTransaccion.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/Servicio.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/Telefono.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/TipoServicio.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/Transaccion.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/TipoCuenta.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/Cuenta.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/Planilla.hbm.xml"/>
+    <mapping resource="com/sistemabancario/dao/PropietarioCuenta.hbm.xml"/>
+  </session-factory>
 </hibernate-configuration>

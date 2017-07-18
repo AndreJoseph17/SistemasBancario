@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="bancodb" name="com.sistemabancario.model.pojo.PropietarioCuenta" optimistic-lock="version" table="propietario_cuenta">
+    <id name="idusuario" type="string">
+      <column length="10" name="idusuario"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="45" name="nombre"/>
+    </property>
+    <property name="apellido" type="string">
+      <column length="45" name="apellido"/>
+    </property>
+    <property name="fechaNacimiento" type="date">
+      <column length="10" name="fecha_nacimiento"/>
+    </property>
+    <property name="login" type="string">
+      <column length="20" name="login"/>
+    </property>
+    <property name="password" type="string">
+      <column length="45" name="password"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="telefonos" table="telefono">
+      <key>
+        <column length="10" name="propietario_cuenta_idusuario" not-null="true"/>
+      </key>
+      <one-to-many class="com.sistemabancario.model.pojo.Telefono"/>
+    </set>
+    <set fetch="select" inverse="false" lazy="true" name="emails" table="usuario_has_email">
+      <key>
+        <column length="45" name="usuario_idusuario" not-null="true"/>
+      </key>
+      <many-to-many entity-name="com.sistemabancario.dao.Email">
+        <column name="email_idemail" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="emails_1" table="email">
+      <key>
+        <column length="10" name="propietario_cuenta_idusuario" not-null="true"/>
+      </key>
+      <one-to-many class="com.sistemabancario.model.pojo.Email"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="cuentas" table="cuenta">
+      <key>
+        <column length="10" name="usuario_idusuario" not-null="true"/>
+      </key>
+      <one-to-many class="com.sistemabancario.model.pojo.Cuenta"/>
+    </set>
+  </class>
+</hibernate-mapping>
