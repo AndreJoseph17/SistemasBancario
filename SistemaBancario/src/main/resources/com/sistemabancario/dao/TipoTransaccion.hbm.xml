@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/07/2017 15:29:45 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="bancodb" name="Model.TipoTransaccion" optimistic-lock="version" table="tipo_transaccion">
+  <class catalog="bancodb" name="com.sistemabancario.model.TipoTransaccion" optimistic-lock="version" table="tipo_transaccion">
     <id name="idtipoTransaccion" type="java.lang.Integer">
       <column name="idtipo_transaccion"/>
       <generator class="identity"/>
@@ -14,7 +14,7 @@
       <key>
         <column name="tipo_transaccion_idtipo_transaccion" not-null="true"/>
       </key>
-      <one-to-many class="Model.Transaccion"/>
+      <one-to-many class="com.sistemabancario.model.Transaccion"/>
     </set>
   </class>
 </hibernate-mapping>

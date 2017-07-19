@@ -48,7 +48,7 @@
                 <scope>compile</scope>
             </dependency>
         <dependency>
-<<<<<<< HEAD
+
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.3.1.Final</version>         
@@ -57,11 +57,12 @@
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>
-=======
+        </dependency>
+        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>5.0</version>
->>>>>>> 218c09201e8e3c382f722ec23e62754416b08f1d
+         
         </dependency>
         <dependency>
                 <groupId>javax</groupId>
