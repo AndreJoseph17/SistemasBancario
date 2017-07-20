@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sistemabancario.controller.bean;
+package com.controller.bean;
 
 /**
  *
  * @author EQUIPO
  */
-public class TransferenciaHasCuentaBean {
+public class PlanillaBean {
     
 }
