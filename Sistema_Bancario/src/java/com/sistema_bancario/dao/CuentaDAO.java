@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dao;
+package com.sistema_bancario.dao;
 
-import com.model.pojo.Cuenta;
-import com.sistemabancario.util.HibernateUtil;
+import com.sistema_bancario.model.pojo.Cuenta;
+import com.sistema_bancario.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Hibernate;

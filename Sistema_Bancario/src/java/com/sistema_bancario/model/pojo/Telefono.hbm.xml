@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/07/2017 14:57:08 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistema_bancario.model.pojo.Telefono" table="telefono" catalog="bancodb" optimistic-lock="version">
+        <id name="idtelefono" type="java.lang.Integer">
+            <column name="idtelefono" />
+            <generator class="identity" />
+        </id>
+        <property name="numero" type="string">
+            <column name="numero" length="45" />
+        </property>
+        <set name="propietarioCuentas" table="propietario_cuenta_has_telefono" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="telefono_idtelefono" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.sistema_bancario.model.pojo.PropietarioCuenta">
+                <column name="propietario_cuenta_idusuario" length="10" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

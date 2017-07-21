@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dao;
+package com.sistema_bancario.dao;
 
-import com.model.pojo.Cuenta;
-import com.sistemabancario.util.HibernateUtil;
+import com.sistema_bancario.model.pojo.Servicio;
+import com.sistema_bancario.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -17,60 +16,61 @@ import org.hibernate.Session;
  *
  * @author andre
  */
-public class CuentaDAO {
-
-    private Cuenta cuenta;
-    private Cuenta newcuenta;
-    private List<Cuenta> DaoAllCuentas;
-    private List<Cuenta> DaoSearchCuentaList;
-
-    public List<Cuenta> AllCuentas() {
+public class ServicioDAO {
+    
+    private Servicio servicio;
+    private Servicio newservicio;
+    private List<Servicio> DaoAllServicio;
+    private List<Servicio> DaoSearchServiciosList;
+    
+    public List<Servicio> AllServicios(){
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
-
         try {
+            
             session.beginTransaction();
-            DaoAllCuentas = session.createCriteria(Cuenta.class).list();
+            DaoAllServicio = session.createCriteria(Servicio.class).list();
             session.getTransaction().commit();
+               
         } catch (Exception e) {
-
+            
             e.printStackTrace();
             session.getTransaction().rollback();
         }
         session.close();
-        return DaoAllCuentas;
+        return DaoAllServicio;
     }
     
-    public List <Cuenta> SearchBy(String campo, String valor){
+    public List<Servicio> SearchBy (String campo, String valor){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List <Cuenta> daoSearchList = new ArrayList<>();
-        try {
+        List<Servicio> daoSearchList = new ArrayList<>();
+        try{
             session.beginTransaction();
-            Query query = session.createQuery("From Cuenta C where C."+campo+" =: valor");
+            Query query = session.createQuery("From Servicio S where S."+campo+" =: valor");
             query.setParameter("valor", valor);
             daoSearchList = query.list();
             session.getTransaction().commit();
-        } catch (Exception e) {
+        }catch(Exception e){
+            
             e.printStackTrace();
             session.getTransaction().rollback();
-        }finally{
-            session.close();
         }
         return daoSearchList;
     }
     
-    public void agregarCuenta(Cuenta newcuenta ){
+    public void agregarServicio(Servicio newservicio){
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-           /**
-            * Aquí se ingresa la cuenta
-            */
+            /**
+             * Aquí se agrega el servicio
+             */
             session.beginTransaction();
-            session.merge(newcuenta);
+            session.merge(newservicio);
             session.flush();
 
             session.getTransaction().commit();
-            
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
@@ -78,32 +78,35 @@ public class CuentaDAO {
         session.close();
     }
     
-    public  void eliminarCuenta(Cuenta cuenta){
+    public void eliminarServicio(Servicio servicio){
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            cuenta.setActiva(Boolean.FALSE);
             session.beginTransaction();
-            session.update(cuenta);
+            session.delete(servicio);
             session.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            
+            e.printStackTrace();  
+            session.getTransaction().rollback();  
         }
+        session.close();
     }
     
-    public void actualizarCuenca(Cuenta cuenta){
+    public void actualizarServicio(Servicio servicio){
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         try {
             session.beginTransaction();
-            session.update(cuenta);
+            session.update(servicio);
             session.flush();
             session.getTransaction().commit();
         } catch (Exception e) {
+            
             e.printStackTrace();
             session.getTransaction().rollback();
         }
-        
         session.close();
     }
+    
 }
