@@ -43,7 +43,7 @@ public class PropietarioCuentaBean implements Serializable {
      * Creates a new instance of PropietarioCuentaBean
      */
     public PropietarioCuentaBean() {
-
+        
     }
 
 }

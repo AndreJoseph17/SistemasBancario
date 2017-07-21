@@ -6,7 +6,7 @@
 package com.dao;
 
 import com.model.pojo.Cuenta;
-import com.sistemabancario.util.HibernateUtil;
+import com.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
