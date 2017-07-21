@@ -5,15 +5,9 @@
  */
 package com.dao;
 
-import com.model.pojo.Cuenta;
-<<<<<<< HEAD
-import com.util.HibernateUtil;
-=======
 import com.sistemabancario.util.HibernateUtil;
 import java.util.ArrayList;
->>>>>>> 6c7135af3cbcbd5cc4481167f691f6845946af8b
 import java.util.List;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -21,93 +15,96 @@ import org.hibernate.Session;
  *
  * @author andre
  */
-public class CuentaDAO {
-
-    private Cuenta cuenta;
-    private Cuenta newcuenta;
-    private List<Cuenta> DaoAllCuentas;
-    private List<Cuenta> DaoSearchCuentaList;
-
-    public List<Cuenta> AllCuentas() {
+public class Tipo_Cuenta {
+    
+    private Tipo_Cuenta tipoCuenta;
+    private Tipo_Cuenta newtipoCuenta;
+    private List<Tipo_Cuenta> DaoAllTipoCuenta;
+    private List<Tipo_Cuenta> DaoSearchTipoCuenta;
+    
+    public List<Tipo_Cuenta> AllTiposCuenta(){
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
-
         try {
             session.beginTransaction();
-            DaoAllCuentas = session.createCriteria(Cuenta.class).list();
+            DaoAllTipoCuenta = session.createCriteria(Tipo_Cuenta.class).list();
             session.getTransaction().commit();
+            
         } catch (Exception e) {
-
+            
             e.printStackTrace();
             session.getTransaction().rollback();
         }
         session.close();
-        return DaoAllCuentas;
+        return DaoAllTipoCuenta;
     }
     
-    public List <Cuenta> SearchBy(String campo, String valor){
+    public List<Tipo_Cuenta> SearchBy(String campo, String valor){
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List <Cuenta> daoSearchList = new ArrayList<>();
-        try {
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         List<Tipo_Cuenta> daoSearchList = new ArrayList<>();
+         try {
             session.beginTransaction();
-            Query query = session.createQuery("From Cuenta C where C."+campo+" =: valor");
+            Query query = session.createQuery("From Servicio S where S."+campo+" =: valor");
             query.setParameter("valor", valor);
             daoSearchList = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
+            
             e.printStackTrace();
             session.getTransaction().rollback();
-        }finally{
-            session.close();
         }
-        return daoSearchList;
+         
+         return daoSearchList;
     }
     
-    public void agregarCuenta(Cuenta newcuenta ){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-           /**
-            * Aquí se ingresa la cuenta
-            */
-            session.beginTransaction();
-            session.merge(newcuenta);
-            session.flush();
+    public void agregarTipoCuenta (Tipo_Cuenta newtipoCuenta){
 
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        try {
+            session.beginTransaction();
+            session.merge(newtipoCuenta);
+            session.flush();
             session.getTransaction().commit();
             
         } catch (Exception e) {
+            
             e.printStackTrace();
             session.getTransaction().rollback();
+        }
+        
+        session.close();
+    }
+    
+    public void eliminarTipoCuenta(Tipo_Cuenta tipoCuenta){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.delete(tipoCuenta);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            
+            e.printStackTrace();  
+            session.getTransaction().rollback();  
         }
         session.close();
     }
     
-    public  void eliminarCuenta(Cuenta cuenta){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            cuenta.setActiva(Boolean.FALSE);
-            session.beginTransaction();
-            session.update(cuenta);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        }
-    }
-    
-    public void actualizarCuenca(Cuenta cuenta){
+    public void actualizarTipoCuenta(Tipo_Cuenta tipoCuenta){
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         try {
             session.beginTransaction();
-            session.update(cuenta);
+            session.update(tipoCuenta);
             session.flush();
             session.getTransaction().commit();
         } catch (Exception e) {
+            
             e.printStackTrace();
             session.getTransaction().rollback();
         }
-        
         session.close();
     }
 }
