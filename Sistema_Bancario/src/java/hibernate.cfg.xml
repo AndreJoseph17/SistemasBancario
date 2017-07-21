@@ -10,15 +10,13 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="com/sistema_bancario/model/pojo/Planilla.hbm.xml"/>
-    <mapping resource="com/sistema_bancario/model/pojo/TipoCuenta.hbm.xml"/>
-    <mapping resource="com/sistema_bancario/model/pojo/Transaccion.hbm.xml"/>
-    <mapping resource="com/sistema_bancario/model/pojo/TipoServicio.hbm.xml"/>
-    <mapping resource="com/sistema_bancario/model/pojo/Cuenta.hbm.xml"/>
-    <mapping resource="com/sistema_bancario/model/pojo/TipoTransaccion.hbm.xml"/>
     <mapping resource="com/sistema_bancario/model/pojo/Servicio.hbm.xml"/>
-    <mapping resource="com/sistema_bancario/model/pojo/Telefono.hbm.xml"/>
-    <mapping resource="com/sistema_bancario/model/pojo/Email.hbm.xml"/>
+    <mapping resource="com/sistema_bancario/model/pojo/TipoTransaccion.hbm.xml"/>
     <mapping resource="com/sistema_bancario/model/pojo/PropietarioCuenta.hbm.xml"/>
+    <mapping resource="com/sistema_bancario/model/pojo/TipoServicio.hbm.xml"/>
+    <mapping resource="com/sistema_bancario/model/pojo/Planilla.hbm.xml"/>
+    <mapping resource="com/sistema_bancario/model/pojo/Transaccion.hbm.xml"/>
+    <mapping resource="com/sistema_bancario/model/pojo/Cuenta.hbm.xml"/>
+    <mapping resource="com/sistema_bancario/model/pojo/TipoCuenta.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -1,5 +1,5 @@
 package com.sistema_bancario.model.pojo;
-// Generated 21/07/2017 14:57:07 by Hibernate Tools 4.3.1
+// Generated 21/07/2017 17:45:32 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -9,9 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -33,9 +30,7 @@ public class PropietarioCuenta  implements java.io.Serializable {
      private Date fechaNacimiento;
      private String login;
      private String password;
-     private Set<Telefono> telefonos = new HashSet<Telefono>(0);
-     private Set<Email> emails = new HashSet<Email>(0);
-     private Set<Email> emails_1 = new HashSet<Email>(0);
+     private String email;
      private Set<Cuenta> cuentas = new HashSet<Cuenta>(0);
 
     public PropietarioCuenta() {
@@ -45,16 +40,14 @@ public class PropietarioCuenta  implements java.io.Serializable {
     public PropietarioCuenta(String idusuario) {
         this.idusuario = idusuario;
     }
-    public PropietarioCuenta(String idusuario, String nombre, String apellido, Date fechaNacimiento, String login, String password, Set<Telefono> telefonos, Set<Email> emails, Set<Email> emails_1, Set<Cuenta> cuentas) {
+    public PropietarioCuenta(String idusuario, String nombre, String apellido, Date fechaNacimiento, String login, String password, String email, Set<Cuenta> cuentas) {
        this.idusuario = idusuario;
        this.nombre = nombre;
        this.apellido = apellido;
        this.fechaNacimiento = fechaNacimiento;
        this.login = login;
        this.password = password;
-       this.telefonos = telefonos;
-       this.emails = emails;
-       this.emails_1 = emails_1;
+       this.email = email;
        this.cuentas = cuentas;
     }
    
@@ -120,40 +113,14 @@ public class PropietarioCuenta  implements java.io.Serializable {
         this.password = password;
     }
 
-@ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name="propietario_cuenta_has_telefono", catalog="bancodb", joinColumns = { 
-        @JoinColumn(name="propietario_cuenta_idusuario", nullable=false, updatable=false) }, inverseJoinColumns = { 
-        @JoinColumn(name="telefono_idtelefono", nullable=false, updatable=false) })
-    public Set<Telefono> getTelefonos() {
-        return this.telefonos;
+    
+    @Column(name="email", length=45)
+    public String getEmail() {
+        return this.email;
     }
     
-    public void setTelefonos(Set<Telefono> telefonos) {
-        this.telefonos = telefonos;
-    }
-
-@ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name="usuario_has_email", catalog="bancodb", joinColumns = { 
-        @JoinColumn(name="usuario_idusuario", nullable=false, updatable=false) }, inverseJoinColumns = { 
-        @JoinColumn(name="email_idemail", nullable=false, updatable=false) })
-    public Set<Email> getEmails() {
-        return this.emails;
-    }
-    
-    public void setEmails(Set<Email> emails) {
-        this.emails = emails;
-    }
-
-@ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name="propietario_cuenta_has_email", catalog="bancodb", joinColumns = { 
-        @JoinColumn(name="propietario_cuenta_idusuario", nullable=false, updatable=false) }, inverseJoinColumns = { 
-        @JoinColumn(name="email_idemail", nullable=false, updatable=false) })
-    public Set<Email> getEmails_1() {
-        return this.emails_1;
-    }
-    
-    public void setEmails_1(Set<Email> emails_1) {
-        this.emails_1 = emails_1;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="propietarioCuenta")
