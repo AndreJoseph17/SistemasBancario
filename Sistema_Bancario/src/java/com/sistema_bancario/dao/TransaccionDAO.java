@@ -7,8 +7,10 @@ package com.sistema_bancario.dao;
 
 import com.sistema_bancario.model.pojo.Transaccion;
 import com.sistema_bancario.util.HibernateUtil;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -38,5 +40,32 @@ public class TransaccionDAO {
         return DaoAllTransaccion;
     }
     
+    /**
+     * Éste proceso es para listar las transacciones 
+     * @param idCuentaPrincipal
+     * @return 
+     */
+    
+    public List <Transaccion> ListarTransaccionesCuentaPrincipal(Integer idCuentaPrincipal){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List <Transaccion> daoSearchList = new ArrayList<>();
+        
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("From Transaccion T where T.cuenta_idcuenta_principal =:idcuenta order by T.fecha");
+            query.setParameter("idcuenta", idCuentaPrincipal);
+            daoSearchList = query.list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        finally{
+            session.close();
+        }
+        
+        return daoSearchList;
+    }
     
 }
