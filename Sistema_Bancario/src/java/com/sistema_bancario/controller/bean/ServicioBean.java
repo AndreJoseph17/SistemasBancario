@@ -53,10 +53,12 @@ public class ServicioBean implements Serializable{
      * @return the servicios
      */
     public List<Servicio> getServicios() {
+        ServicioDAO servicioDao=new ServicioDAO();
+        servicios=servicioDao.AllServicios();
         return servicios;
     }
 
-    /**
+       /**
      * @param servicios the servicios to set
      */
     public void setServicios(List<Servicio> servicios) {
@@ -83,7 +85,7 @@ public class ServicioBean implements Serializable{
        servicio=new Servicio();
    }
    
-   public void eliminarPropietario(){
+   public void eliminarServicio(){
        ServicioDAO servicioDao = new ServicioDAO();
        servicioDao.eliminarServicio(servicio);
        servicio=new Servicio();

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>          
+        <title>Ingreso Usuario Nuevo</title>
+    </h:head>
+    
+    <body>
+    
+      <!-- <ui:composition>  -->   
+           <center><img src="resources/img/logo.png" align="center" alt="Logo Banco Pichincha" width="500" height="100"></img></center>  
+            <marquee bgcolor="yellow" width="98%"><font size="7">Sistema Bancario</font></marquee>
+            <hr/>
+            
+       <!--     <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Ingreso de usuario">
+     -->            <h:form id="UsuarioCreateForm">
+         <p:growl id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
+                        <p:fieldset legend="Datos Propietario">
+                            <h:panelGrid columns="2" id="pgDatos">
+                                <p:outputLabel value="idUsuario" />
+                                <p:inputText id="txtidUsuario" value="#{propietarioCuentaBean.usuario.idusuario}" required="true"/>
+
+                                <p:outputLabel value="Nombre" />
+                                <p:inputText id="txtNombre" value="#{propietarioCuentaBean.usuario.nombre}" required="true"/>
+
+                                <p:outputLabel value="Apellido" />
+                                <p:inputText id="txtApellido" value="#{propietarioCuentaBean.usuario.apellido}" required="true"/>
+
+                                <p:outputLabel value="FechaNacimiento" />
+                                <p:calendar id="txtFecha" value="#{propietarioCuentaBean.usuario.fechaNacimiento}" locale="es" required="true"/> 
+                            </h:panelGrid>
+                        </p:fieldset> 
+
+                        <p:fieldset legend="Datos Cuenta">
+                            <h:panelGrid columns="2" id="pgCuenta">
+                            <p:outputLabel value="Login" />
+                            <p:inputText id="txtLogin" value="#{propietarioCuentaBean.usuario.login}" required="true"/>
+
+                            <p:outputLabel value="Clave" />
+                            <p:password id="clave" value="#{propietarioCuentaBean.usuario.password}" required="true" feedback="true" promptLabel="Ingrese una clave"/>
+
+                            <p:outputLabel value="Email" />
+                            <p:inputText id="txtEmail" value="#{propietarioCuentaBean.usuario.email}" required="true"/>
+                            </h:panelGrid>
+                            
+                            <p:commandButton value="Registar" icon="ui-icon-check" update="pgDatos, pgCuenta, mensaje, :PropietariosListForm" actionListener="#{propietarioCuentaBean.agregarPropietario()}"/>
+                            
+                        </p:fieldset>
+                     
+                     <p:link value="Regresar" outcome="index.xhtml"/>
+                     
+                    </h:form>
+     
+                    <hr/>
+                    <h2><b>LISTA DE CLIENTES REGISTRADOS</b></h2>
+            <h:form id="PropietariosListForm">
+          <!--      <p:panel header="Listado de Clientes">  -->
+                    <p:dataTable id="datalist" value="#{propietarioCuentaBean.usuarios}" var="item"
+                                 emptyMessage="No hay clientes registrados" selectionMode="single" selection="#{propietarioCuentaBean.usuario}"
+                                 paginator="true" paginatorPosition="top"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowKey="#{item.idusuario}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                    <!--    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/> -->
+ <!--<f:facet  name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage name="img/excel.png" width="24" alt="Icono Excel"/>
+                <p:dataExporter type="xls" target="datalist" fileName="cars" />
+            </h:commandLink>
+
+            <h:commandLink >
+                <p:graphicImage name="img/pdf.png" width="24" alt="Icono PDF"/>
+                <p:dataExporter type="pdf" target="datalist" fileName="profesor"/>
+            </h:commandLink>
+        </f:facet>-->
+                            <p:column headerText="IdUsuario/Cedula">
+                           
+                                <h:outputText value="#{item.idusuario}"/>
+                        
+                        </p:column>
+                        
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Apellido">
+                                <h:outputText value="#{item.apellido}"/>
+                            </p:column>
+                            <p:column headerText="FechaNacimiento">
+                                <h:outputText value="#{item.fechaNacimiento}"/>
+                            </p:column>
+                            <p:column headerText="Login">
+                                <h:outputText value="#{item.login}"/>
+                            </p:column>
+                            <p:column headerText="Password">
+                                <h:outputText value="*****"/>
+                            </p:column>
+                            <p:column headerText="Email">
+                                <h:outputText value="#{item.email}"/>
+                            </p:column>
+                            <p:column headerText="Modificar">
+                                      <p:commandButton value="Modificar" icon="ui-icon-pencil" oncomplete="dlgmodificar.show()" update=":PropietarioModificarForm">
+                                          <f:setPropertyActionListener target="#{propietarioCuentaBean.usuario}" value="#{per}" />
+                                      </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Eliminar">
+                                      <p:commandButton value="Eliminar" icon="ui-icon-trash" oncomplete="dlgeliminar.show()">
+                                          <f:setPropertyActionListener target="#{propietarioCuentaBean.usuario}" value="#{per}" />
+                                      </p:commandButton>
+                            </p:column>      
+                    </p:dataTable>
+               <!-- </p:panel> -->
+            </h:form>
+                    
+                    
+         <p:dialog id="dlgmodifcar" widgetVar="dlgmodificar" modal="true" resizable="false" header="Modificar datos del Cliente Registrado" showEffect="explode" hideEffect="explode">
+            <h:form id="PropietarioModificarForm">
+               
+                
+                    <p:panelGrid columns="2">
+                                <p:outputLabel value="idUsuario/Cedula" />
+                                <p:inputText id="txtidUsuario" value="#{propietarioCuentaBean.usuario.idusuario}"/>
+
+                                <p:outputLabel value="Nombre" />
+                                <p:inputText id="txtNombre" value="#{propietarioCuentaBean.usuario.nombre}"/>
+
+                                <p:outputLabel value="Apellido" />
+                                <p:inputText id="txtApellido" value="#{propietarioCuentaBean.usuario.apellido}"/>
+
+                                <p:outputLabel value="FechaNacimiento" />
+                                <p:calendar id="txtFecha" value="#{propietarioCuentaBean.usuario.fechaNacimiento}"/> 
+                            
+                                <p:outputLabel value="Login" />
+                                <p:inputText id="txtLogin" value="#{propietarioCuentaBean.usuario.login}"/>
+
+                                <p:outputLabel value="Clave" />
+                                <p:password id="clave" value="#{propietarioCuentaBean.usuario.password}" />
+
+                                <p:outputLabel value="Email" />
+                                <p:inputText id="txtEmail" value="#{propietarioCuentaBean.usuario.email}" />
+                    </p:panelGrid>
+
+                <p:commandButton actionListener="#{propietarioCuentaBean.actualizarPropietario()}" value="Modificar" update=":PropietariosListForm" oncomplete="dlgmodificar.hide()"/>
+                    
+            </h:form>
+        </p:dialog>
+    
+                    
+                    
+        <p:dialog id="dlg2" widgetVar="dlgeliminar" modal="true" resizable="false" header="Eliminar Cliente" showEffect="explode" hideEffect="explode">
+            <h:form id="PropietarioEliminarForm">
+                <h:outputText value="Desea eliminar al cliente?" />
+                <p:commandButton value="Si" actionListener="#{propietarioCuentaBean.eliminarPropietario()}"  update=":PropietariosListForm" oncomplete="dlgeliminar.hide();"/>
+                <p:commandButton value="No" onclick="dlg2.hide()" />
+                
+            </h:form>
+        </p:dialog>
+     <br />
+  <!--              </p:dialog>
+        </ui:composition>
+ -->       
+    </body>
+</html>
+          <!--      <img src="resources/img/pie.png" align="center" alt="Pie de pagina Banco Pichincha" height="50" width="1500"></img>  
+ -->
+
+

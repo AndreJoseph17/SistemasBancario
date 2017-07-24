@@ -69,32 +69,17 @@ and open the template in the editor.
             <h:form id="PropietariosListForm">
           <!--      <p:panel header="Listado de Clientes">  -->
           <p:dataTable id="datalist" value="#{cuentaBean.cuentas}" var="item"
-                       emptyMessage="No hay cuentas asociadas" selectionMode="single" selection="#{cuentaBean.cuenta}"
+                                emptyMessage="No hay cuentas asociadas" selectionMode="single" selection="#{cuentaBean.cuenta}"
                                  paginator="true" paginatorPosition="top"
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    rowKey="#{item.idcuenta}"
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowKey="#{item.idcuenta}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                    <!--    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/> -->
- <!--<f:facet  name="{Exporters}">
-            <h:commandLink>
-                <p:graphicImage name="img/excel.png" width="24" alt="Icono Excel"/>
-                <p:dataExporter type="xls" target="datalist" fileName="cars" />
-            </h:commandLink>
-
-            <h:commandLink >
-                <p:graphicImage name="img/pdf.png" width="24" alt="Icono PDF"/>
-                <p:dataExporter type="pdf" target="datalist" fileName="profesor"/>
-            </h:commandLink>
-        </f:facet>-->
                             <p:column headerText="Nro Cuenta">
-                           
                                 <h:outputText value="#{item.idcuenta}"/>
-                        
-                        </p:column>
+                            </p:column>
                         
                             <p:column headerText="Saldo">
                                 <h:outputText value="#{item.saldo}"/>
@@ -106,57 +91,49 @@ and open the template in the editor.
                             
                             <p:column headerText="Transacciones">
                                       <p:commandButton value="Transacciones"  oncomplete="dlgtransacciones.show()" update=":TransaccionesCuentaForm">
-                                          <f:setPropertyActionListener target="#{propietarioCuentaBean.usuario}" value="#{per}" />
+                                          <f:setPropertyActionListener target="#{transaccionBean.listarTransacciones(item.idcuenta)}" value="#{per}" />
                                       </p:commandButton>
                             </p:column>
     
                     </p:dataTable>
-               <!-- </p:panel> -->
             </h:form>
                     
-          <!--          
-         <p:dialog id="dlg" widgetVar="dlgmodificar" modal="true" resizable="false" header="Modificar datos del Cliente Registrado" showEffect="explode" hideEffect="explode">
-            <h:form id="PropietarioModificarForm">
+                 
+         <p:dialog id="dlgtransac" widgetVar="dlgtransacciones" modal="true" resizable="false" header="Modificar datos del Cliente Registrado" showEffect="explode" hideEffect="explode">
+            <h:form id="TransaccionesCuentaForm">
                
                 
                     <p:panelGrid columns="2">
-                                <p:outputLabel value="idUsuario/Cedula" />
-                                <p:inputText id="txtidUsuario" value="#{propietarioCuentaBean.usuario.idusuario}"/>
+                                <p:outputLabel value="idTransaccion" />
+                                <p:outputLabel value="#{transaccionBean.transaccion.idtransaccion}"/>
 
-                                <p:outputLabel value="Nombre" />
-                                <p:inputText id="txtNombre" value="#{propietarioCuentaBean.usuario.nombre}"/>
+                                <p:outputLabel value="Cantidad" />
+                                <p:outputLabel value="#{transaccionBean.transaccion.cantidad}"/>
 
-                                <p:outputLabel value="Apellido" />
-                                <p:inputText id="txtApellido" value="#{propietarioCuentaBean.usuario.apellido}"/>
+                                <p:outputLabel value="Fecha" />
+                                <p:outputLabel value="#{transaccionBean.transaccion.fecha}"/>
 
-                                <p:outputLabel value="FechaNacimiento" />
-                                <p:calendar id="txtFecha" value="#{propietarioCuentaBean.usuario.fechaNacimiento}"/> 
+                                <p:outputLabel value="TipoTransaccion" />
+                                <p:outputLabel value="#{transaccionBean.transaccion.tipoTransaccion}"/>
                             
-                                <p:outputLabel value="Login" />
-                                <p:inputText id="txtLogin" value="#{propietarioCuentaBean.usuario.login}"/>
+                                <p:outputLabel value="CuentaPrincipal" />
+                                <p:outputLabel value="#{transaccionBean.transaccion.cuentaByCuentaIdcuentaPrincipal}"/>
 
-                                <p:outputLabel value="Clave" />
-                                <p:password id="clave" value="#{propietarioCuentaBean.usuario.password}" />
+                                <p:outputLabel value="Cuenta2" />
+                                <p:outputLabel value="#{transaccionBean.transaccion.cuentaByCuentaIdcuenta2}"/>
 
-                                <p:outputLabel value="Email" />
-                                <p:inputText id="txtEmail" value="#{propietarioCuentaBean.usuario.email}" />
+                                <p:outputLabel value="SaltoAnterior" />
+                                <p:outputLabel value="#{transaccionBean.transaccion.saldoAnterior}"/>
+                                
+                                <p:outputLabel value="SaldoPosterior" />
+                                <p:outputLabel value="#{transaccionBean.transaccion.saldoPosterior}"/>
                     </p:panelGrid>
-
-                <p:commandButton actionListener="#{propietarioCuentaBean.actualizarPropietario()}" value="Modificar" update=":PropietariosListForm" oncomplete="dlgmodificar.hide()"/>
-                    
+                <p:commandButton value="Cerrar" onclick="dlgtransacciones.hide()"/>
+                                    
             </h:form>
         </p:dialog>
     
-                    
-                    
-        <p:dialog id="dlg2" widgetVar="dlgeliminar" modal="true" resizable="false" header="Eliminar Cliente" showEffect="explode" hideEffect="explode">
-            <h:form id="PropietarioEliminarForm">
-                <h:outputText value="Desea eliminar al cliente?" />
-                <p:commandButton value="Si" actionListener="#{propietarioCuentaBean.eliminarPropietario()}"  update=":PropietariosListForm" oncomplete="dlgeliminar.hide();"/>
-                <p:commandButton value="No" onclick="dlg2.hide()" />
-                
-            </h:form>
-        </p:dialog>-->
+        
      <br />
         
         

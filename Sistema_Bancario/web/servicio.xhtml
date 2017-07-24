@@ -22,37 +22,53 @@ and open the template in the editor.
             
             <h:form id="PagoServicioForm">
          <p:growl id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
-                        <p:fieldset legend="Datos del Servicio">
-                            <h:panelGrid columns="2" id="pgDatos">
-                                <p:outputLabel value="idUsuario" />
-                                <p:inputText id="txtidUsuario" value="#{propietarioCuentaBean.usuario.idusuario}" required="true"/>
-
-                                <p:outputLabel value="Nombre" />
-                                <p:inputText id="txtNombre" value="#{propietarioCuentaBean.usuario.nombre}" required="true"/>
-
-                                <p:outputLabel value="Apellido" />
-                                <p:inputText id="txtApellido" value="#{propietarioCuentaBean.usuario.apellido}" required="true"/>
-
-                                <p:outputLabel value="FechaNacimiento" />
-                                <p:calendar id="txtFecha" value="#{propietarioCuentaBean.usuario.fechaNacimiento}" locale="es" required="true"/> 
-                            </h:panelGrid>
+                        <p:fieldset legend="Datos del Servicio A Pagar">
+                            <h:panelGrid columns="2" id="pgDatosServicio">
+                                
+                                <p:outputLabel value="TipoServicio" />
+                                <p:selectOneMenu id="TipoServicio" value="#{servicioBean.servicio}">
+                                    <f:selectItems value="#{servicioBean.servicios}"
+                                               var="servicioItem"
+                                               itemLabel="#{servicioItem.tipoServicio}"
+                                               itemValue="#{servicioItem.idservicio}" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel value="CodServicio" />
+                                <p:selectOneMenu id="CodServicio" value="#{servicioBean.servicio}">
+                                    <f:selectItems value="#{servicioBean.servicio.planillas}"
+                                               var="codservicioItem"
+                                               itemLabel="#{codservicioItem.valor}"
+                                               itemValue="#{codservicioItem.idplanilla}" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel value="Cuenta" />
+                                <p:selectOneMenu id="TipoServicio" value="#{servicioBean.servicio.cuenta}">
+                                    <f:selectItems value="#{cuentaBean.cuentas}"
+                                               var="cuentaItem"
+                                               itemLabel="#{cuentaItem.propietarioCuenta}"
+                                               itemValue="#{cuentaItem.idcuenta}" />
+                                </p:selectOneMenu>
+                                
+                                
+                                <p:outputLabel value="Valor a Cancelar" />
+                                <p:selectOneMenu id="CodServicio" value="#{servicioBean.servicio}">
+                                    <f:selectItems value="#{servicioBean.servicio.planillas}"
+                                               var="codservicioItem"
+                                               itemLabel="#{codservicioItem.idplanilla}"
+                                               itemValue="#{codservicioItem.valor}" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel value="Valor" />
+                                <p:inputText id="txtValor" value="#{transaccionBean.transaccion.cantidad}" required="true"/>
+                        
+                                
+                                </h:panelGrid>
+                            
+                            <p:commandButton value="Pagar"  update="pgDatosServicio, mensaje" actionListener="#{servicioBean.agregarServicio()}"/>
+                      
                         </p:fieldset> 
 
-                        <p:fieldset legend="Datos Cuenta">
-                            <h:panelGrid columns="2" id="pgCuenta">
-                            <p:outputLabel value="Login" />
-                            <p:inputText id="txtLogin" value="#{propietarioCuentaBean.usuario.login}" required="true"/>
-
-                            <p:outputLabel value="Clave" />
-                            <p:password id="clave" value="#{propietarioCuentaBean.usuario.password}" required="true" feedback="true" promptLabel="Ingrese una clave"/>
-
-                            <p:outputLabel value="Email" />
-                            <p:inputText id="txtEmail" value="#{propietarioCuentaBean.usuario.email}" required="true"/>
-                            </h:panelGrid>
-                            
-                            <p:commandButton value="Registar" icon="ui-icon-check" update="pgDatos, pgCuenta, mensaje, :PropietariosListForm" actionListener="#{propietarioCuentaBean.agregarPropietario()}"/>
-                            
-                        </p:fieldset>
+                        
                      
                      <p:link value="Regresar" outcome="index.xhtml"/>
                      

@@ -15,19 +15,19 @@ import org.hibernate.Session;
  *
  * @author andre
  */
-public class Tipo_Cuenta {
+public class Tipo_CuentaDAO {
     
-    private Tipo_Cuenta tipoCuenta;
-    private Tipo_Cuenta newtipoCuenta;
-    private List<Tipo_Cuenta> DaoAllTipoCuenta;
-    private List<Tipo_Cuenta> DaoSearchTipoCuenta;
+    private Tipo_CuentaDAO tipoCuenta;
+    private Tipo_CuentaDAO newtipoCuenta;
+    private List<Tipo_CuentaDAO> DaoAllTipoCuenta;
+    private List<Tipo_CuentaDAO> DaoSearchTipoCuenta;
     
-    public List<Tipo_Cuenta> AllTiposCuenta(){
+    public List<Tipo_CuentaDAO> AllTiposCuenta(){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            DaoAllTipoCuenta = session.createCriteria(Tipo_Cuenta.class).list();
+            DaoAllTipoCuenta = session.createCriteria(Tipo_CuentaDAO.class).list();
             session.getTransaction().commit();
             
         } catch (Exception e) {
@@ -39,10 +39,10 @@ public class Tipo_Cuenta {
         return DaoAllTipoCuenta;
     }
     
-    public List<Tipo_Cuenta> SearchBy(String campo, String valor){
+    public List<Tipo_CuentaDAO> SearchBy(String campo, String valor){
         
          Session session = HibernateUtil.getSessionFactory().openSession();
-         List<Tipo_Cuenta> daoSearchList = new ArrayList<>();
+         List<Tipo_CuentaDAO> daoSearchList = new ArrayList<>();
          try {
             session.beginTransaction();
             Query query = session.createQuery("From Servicio S where S."+campo+" =: valor");
@@ -58,7 +58,7 @@ public class Tipo_Cuenta {
          return daoSearchList;
     }
     
-    public void agregarTipoCuenta (Tipo_Cuenta newtipoCuenta){
+    public void agregarTipoCuenta (Tipo_CuentaDAO newtipoCuenta){
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         
@@ -77,7 +77,7 @@ public class Tipo_Cuenta {
         session.close();
     }
     
-    public void eliminarTipoCuenta(Tipo_Cuenta tipoCuenta){
+    public void eliminarTipoCuenta(Tipo_CuentaDAO tipoCuenta){
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
@@ -91,7 +91,7 @@ public class Tipo_Cuenta {
         session.close();
     }
     
-    public void actualizarTipoCuenta(Tipo_Cuenta tipoCuenta){
+    public void actualizarTipoCuenta(Tipo_CuentaDAO tipoCuenta){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         
