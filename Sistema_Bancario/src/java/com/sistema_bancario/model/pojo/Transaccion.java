@@ -4,16 +4,24 @@ package com.sistema_bancario.model.pojo;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +33,31 @@ import javax.persistence.TemporalType;
 @Table(name="transaccion"
     ,catalog="bancodb"
 )
+/**
+ * Mapeo de procedimiento almacenado - registrar_transacciones  
+ */
+@NamedStoredProcedureQueries({
+    @NamedStoredProcedureQuery(
+        name = "generar_transferencia",
+        procedureName = "generar_transferencia",
+        parameters = {  @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "id_cuenta_principal"),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "id_cuenta_2"),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, type = Double.class, name = "valor_pagar"),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "valor_retorno") } ),
+        
+    @NamedStoredProcedureQuery(
+        name = "filtrar_transacciones_fecha",
+        procedureName = "filtrar_transacciones_fecha",
+        parameters = {  @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "idcuenta_principal"),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, type = Date.class, name = "fecha_inicio"),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, type = Date.class, name = "fecha_final"),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "valor_retorno")})
+}    
+)
+
+
+
+
 public class Transaccion  implements java.io.Serializable {
 
 
@@ -38,6 +71,11 @@ public class Transaccion  implements java.io.Serializable {
      private Double saldoPosterior;
      private Set<Planilla> planillas = new HashSet<Planilla>(0);
 
+     /**
+      * EntityManager
+      */
+     private EntityManagerFactory emf;
+     
     public Transaccion() {
     }
 
@@ -150,9 +188,62 @@ public class Transaccion  implements java.io.Serializable {
     public void setPlanillas(Set<Planilla> planillas) {
         this.planillas = planillas;
     }
+    
+    /**
+     * Método para llamar a procedimiento almacenado registrar_transaccion
+     * @param id_cuenta_principal
+     * @param id_cuenta_2
+     * @param valor_pagar
+     * @return 
+     */
 
 
-
+    public Integer registrar_transaccion(Integer id_cuenta_principal, Integer id_cuenta_2, 
+                                        Double valor_pagar){
+        
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction();
+        
+        StoredProcedureQuery query = em.createNamedStoredProcedureQuery("generar_transferencia");
+        query.setParameter("id_cuenta_principal", id_cuenta_principal);
+        query.setParameter("id_cuenta_2", id_cuenta_2);
+        query.setParameter("valor_pagar", valor_pagar);
+        query.execute();
+        
+        Integer valor_retorno = (Integer) query.getOutputParameterValue("valor_retorno");
+        em.getTransaction().commit();
+        em.close();
+        
+        return valor_retorno;
+        
+    }
+    
+    /**
+     * Método para filtrar transacciones de cierta fecha a otra 
+     * @param idcuenta_principal
+     * @param fecha_inicio
+     * @param fecha_final
+     * @param valor_retorno
+     * @return 
+     */
+    
+   public List<Transaccion> filtrar_transacciones_fecha(Integer idcuenta_principal, Date fecha_inicio,
+                                                        Date fecha_final ,Integer valor_retorno){
+       EntityManager em = emf.createEntityManager();
+       em.getTransaction();
+       
+       StoredProcedureQuery query = em.createNamedStoredProcedureQuery("filtrar_transacciones_fecha");
+       query.setParameter("idcuenta_principal", idcuenta_principal);
+       query.setParameter("fecha_inicio", fecha_inicio);
+       query.setParameter("fecha_final", fecha_final);
+       query.execute();
+       
+       List<Transaccion> filtro_transacciones =  query.getResultList();
+       em.getTransaction().commit();
+       em.close();
+       
+       return filtro_transacciones;
+   }
 
 }
 

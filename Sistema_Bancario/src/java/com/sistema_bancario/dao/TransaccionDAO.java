@@ -5,6 +5,7 @@
  */
 package com.sistema_bancario.dao;
 
+import com.mysql.jdbc.Connection;
 import com.sistema_bancario.model.pojo.Transaccion;
 import com.sistema_bancario.util.HibernateUtil;
 import java.util.ArrayList;
@@ -67,5 +68,11 @@ public class TransaccionDAO {
         
         return daoSearchList;
     }
+    
+   public void Registrar_Transaccion(Integer id_cuenta_principal, Integer id_cuenta_2, Double cantidad){
+       
+       Session session = HibernateUtil.getSessionFactory().openSession();
+       
+   }
     
 }
