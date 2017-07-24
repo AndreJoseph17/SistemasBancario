@@ -40,14 +40,14 @@ public class PropietarioCuentaDAO {
         return DaoAllUsers;
     }
     
-    public List<PropietarioCuenta> SearchByRecordNo(String RecordNo){
+    public List<PropietarioCuenta> SearchByRecordNo(String campo, String valor){
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<PropietarioCuenta> daoSearchList = new ArrayList<>();
         
         try{
             session.beginTransaction();
-            Query query = session.createQuery("From PropietarioCuenta PC where PC.recordNo =:recordNo");
-            query.setParameter("recordNo", RecordNo);
+            Query query = session.createQuery("From PropietarioCuenta PC where PC."+campo+" =:valor");
+            query.setParameter("valor", valor);
             daoSearchList = query.list();
             int count = daoSearchList.size();
             session.getTransaction().commit();
@@ -90,7 +90,6 @@ public class PropietarioCuentaDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
             session.beginTransaction();
-            session.delete(user);
             session.delete(user);
             session.getTransaction().commit();
         }
