@@ -7,11 +7,9 @@ package com.sistema_bancario.controller.bean;
 
 import com.sistema_bancario.dao.Tipo_ServicioDAO;
 import com.sistema_bancario.model.pojo.TipoServicio;
-<<<<<<< HEAD
 import java.io.Serializable;
-=======
+
 import java.util.Iterator;
->>>>>>> 7aedc6a534da9e6829ae131e94947d53f1d860d1
 import java.util.List;
 import java.util.Set;
 import javax.faces.application.FacesMessage;
