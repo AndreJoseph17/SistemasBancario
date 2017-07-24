@@ -34,7 +34,7 @@ public class HibernateUtil {
              System.out.println("Falló la creación de sessionFactory....otra vez "+ ex);
              throw new ExceptionInInitializerError(ex);
          }
-     }
+     } 
      
      public static SessionFactory getSessionFactory(){
          if(sessionFactory == null) 
