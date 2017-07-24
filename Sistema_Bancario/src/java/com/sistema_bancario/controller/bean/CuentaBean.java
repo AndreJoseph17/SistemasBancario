@@ -28,7 +28,7 @@ import javax.faces.view.ViewScoped;
 public class CuentaBean implements Serializable{
 
     private Cuenta cuenta;
-    private List<Cuenta> cuentas;
+    private List<Cuenta> cuentas; 
     
     
     public CuentaBean() {
