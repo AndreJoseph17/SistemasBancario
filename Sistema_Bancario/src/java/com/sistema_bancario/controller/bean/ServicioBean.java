@@ -84,7 +84,7 @@ public class ServicioBean {
        servicio=new Servicio();
    }
    
-   public void eliminarPropietario(){
+   public void eliminarServicio(){
        ServicioDAO servicioDao = new ServicioDAO();
        servicioDao.eliminarServicio(servicio);
        servicio=new Servicio();
