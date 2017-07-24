@@ -50,8 +50,8 @@ and open the template in the editor.
                             
                             <p:outputLabel value="estadoCuenta" />
                             <p:selectOneMenu id="estadoCuenta" value="#{cuentaBean.cuenta.activa}" required="true">
-                                <f:selectItem  itemLabel="Activa" itemValue=1 />
-                                <f:selectItem  itemLabel="Desactiva" itemValue=0 />
+                                <f:selectItem  itemLabel="Activa" itemValue="1" />
+                                <f:selectItem  itemLabel="Desactiva" itemValue="0" />
                             </p:selectOneMenu>    
                            
                             </h:panelGrid>
@@ -65,14 +65,14 @@ and open the template in the editor.
                     </h:form>
      
                     <hr/>
-                    <h2><b>LISTA DE CLIENTES REGISTRADOS</b></h2>
+                    <h2><b>LISTA DE CUENTAS</b></h2>
             <h:form id="PropietariosListForm">
           <!--      <p:panel header="Listado de Clientes">  -->
-                    <p:dataTable id="datalist" value="#{propietarioCuentaBean.usuarios}" var="item"
-                                 emptyMessage="No hay clientes registrados" selectionMode="single" selection="#{propietarioCuentaBean.usuario}"
+          <p:dataTable id="datalist" value="#{cuentaBean.cuentas}" var="item"
+                       emptyMessage="No hay cuentas asociadas" selectionMode="single" selection="#{cuentaBean.cuenta}"
                                  paginator="true" paginatorPosition="top"
                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    rowKey="#{item.idusuario}"
+                    rowKey="#{item.idcuenta}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
@@ -90,30 +90,22 @@ and open the template in the editor.
                 <p:dataExporter type="pdf" target="datalist" fileName="profesor"/>
             </h:commandLink>
         </f:facet>-->
-                            <p:column headerText="IdUsuario/Cedula">
+                            <p:column headerText="Nro Cuenta">
                            
-                                <h:outputText value="#{item.idusuario}"/>
+                                <h:outputText value="#{item.idcuenta}"/>
                         
                         </p:column>
                         
-                            <p:column headerText="Nombre">
-                                <h:outputText value="#{item.nombre}"/>
+                            <p:column headerText="Saldo">
+                                <h:outputText value="#{item.saldo}"/>
                             </p:column>
-                            <p:column headerText="Apellido">
-                                <h:outputText value="#{item.apellido}"/>
+                            <p:column headerText="FechaTransaccion">
+                                <h:outputText value="#{item.transaccionsForCuentaIdcuentaPrincipal}"/>
                             </p:column>
                             <p:column headerText="FechaNacimiento">
                                 <h:outputText value="#{item.fechaNacimiento}"/>
                             </p:column>
-                            <p:column headerText="Login">
-                                <h:outputText value="#{item.login}"/>
-                            </p:column>
-                            <p:column headerText="Password">
-                                <h:outputText value="*****"/>
-                            </p:column>
-                            <p:column headerText="Email">
-                                <h:outputText value="#{item.email}"/>
-                            </p:column>
+                            
                             <p:column headerText="Modificar">
                                       <p:commandButton value="Modificar" icon="ui-icon-pencil" oncomplete="dlgmodificar.show()" update=":PropietarioModificarForm">
                                           <f:setPropertyActionListener target="#{propietarioCuentaBean.usuario}" value="#{per}" />

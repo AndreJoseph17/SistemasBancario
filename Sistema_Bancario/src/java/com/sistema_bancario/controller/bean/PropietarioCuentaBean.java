@@ -28,9 +28,6 @@ import javax.faces.context.FacesContext;
 public class PropietarioCuentaBean implements Serializable {
 
     PropietarioCuenta usuario;
-    //PropietarioCuenta newusuario;
-    
-    
     List<PropietarioCuenta> usuarios;
     //private List<PropietarioCuenta> searchList;
     //private List<PropietarioCuenta> searchByRecordNoList;
@@ -45,16 +42,7 @@ public class PropietarioCuentaBean implements Serializable {
         setUsuario(new PropietarioCuenta());
         return getUsuario();
     }
-    
-    
-    
-    /*
-    public List<PropietarioCuenta> getUsers(){
-        setUsuarios(userDao.AllUsers());
-        return getUsuarios();
-    }*/
-    
-    
+  
 
     /**
      * @return the usuario
