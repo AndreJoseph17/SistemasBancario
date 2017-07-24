@@ -102,25 +102,19 @@ and open the template in the editor.
                             <p:column headerText="FechaTransaccion">
                                 <h:outputText value="#{item.transaccionsForCuentaIdcuentaPrincipal}"/>
                             </p:column>
-                            <p:column headerText="FechaNacimiento">
-                                <h:outputText value="#{item.fechaNacimiento}"/>
-                            </p:column>
                             
-                            <p:column headerText="Modificar">
-                                      <p:commandButton value="Modificar" icon="ui-icon-pencil" oncomplete="dlgmodificar.show()" update=":PropietarioModificarForm">
+                            
+                            <p:column headerText="Transacciones">
+                                      <p:commandButton value="Transacciones"  oncomplete="dlgtransacciones.show()" update=":TransaccionesCuentaForm">
                                           <f:setPropertyActionListener target="#{propietarioCuentaBean.usuario}" value="#{per}" />
                                       </p:commandButton>
                             </p:column>
-                            <p:column headerText="Eliminar">
-                                      <p:commandButton value="Eliminar" icon="ui-icon-trash" oncomplete="dlgeliminar.show()">
-                                          <f:setPropertyActionListener target="#{propietarioCuentaBean.usuario}" value="#{per}" />
-                                      </p:commandButton>
-                            </p:column>      
+    
                     </p:dataTable>
                <!-- </p:panel> -->
             </h:form>
                     
-                    
+          <!--          
          <p:dialog id="dlg" widgetVar="dlgmodificar" modal="true" resizable="false" header="Modificar datos del Cliente Registrado" showEffect="explode" hideEffect="explode">
             <h:form id="PropietarioModificarForm">
                
@@ -162,7 +156,7 @@ and open the template in the editor.
                 <p:commandButton value="No" onclick="dlg2.hide()" />
                 
             </h:form>
-        </p:dialog>
+        </p:dialog>-->
      <br />
         
         
