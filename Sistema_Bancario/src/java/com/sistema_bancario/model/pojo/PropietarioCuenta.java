@@ -1,5 +1,5 @@
 package com.sistema_bancario.model.pojo;
-// Generated 21/07/2017 17:45:32 by Hibernate Tools 4.3.1
+// Generated 23/07/2017 22:28:09 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
