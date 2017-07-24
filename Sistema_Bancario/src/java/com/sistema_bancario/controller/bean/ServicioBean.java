@@ -52,10 +52,12 @@ public class ServicioBean {
      * @return the servicios
      */
     public List<Servicio> getServicios() {
+        ServicioDAO servicioDao=new ServicioDAO();
+        servicios=servicioDao.AllServicios();
         return servicios;
     }
 
-    /**
+       /**
      * @param servicios the servicios to set
      */
     public void setServicios(List<Servicio> servicios) {

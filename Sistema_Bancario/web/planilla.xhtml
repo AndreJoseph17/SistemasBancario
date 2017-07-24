@@ -5,12 +5,65 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <head>
         <title>Reporte o Planilla del Usuario</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <hr/>
+                    <h2><b>PLANILLA</b></h2>
+            <h:form id="PropietariosListForm">
+          <!--      <p:panel header="Listado de Clientes">  -->
+                    <p:dataTable id="datalist" value="#{propietarioCuentaBean.usuarios}" var="item"
+                                 emptyMessage="No hay clientes registrados" selectionMode="single" selection="#{propietarioCuentaBean.usuario}"
+                                 paginator="true" paginatorPosition="top"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowKey="#{item.idusuario}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                            <p:column headerText="IdUsuario/Cedula">
+                           
+                                <h:outputText value="#{item.idusuario}"/>
+                        
+                        </p:column>
+                        
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Apellido">
+                                <h:outputText value="#{item.apellido}"/>
+                            </p:column>
+                            <p:column headerText="FechaNacimiento">
+                                <h:outputText value="#{item.fechaNacimiento}"/>
+                            </p:column>
+                            <p:column headerText="Login">
+                                <h:outputText value="#{item.login}"/>
+                            </p:column>
+                            <p:column headerText="Password">
+                                <h:outputText value="*****"/>
+                            </p:column>
+                            <p:column headerText="Email">
+                                <h:outputText value="#{item.email}"/>
+                            </p:column>
+                            <p:column headerText="Modificar">
+                                      <p:commandButton value="Modificar" icon="ui-icon-pencil" oncomplete="dlgmodificar.show()" update=":PropietarioModificarForm">
+                                          <f:setPropertyActionListener target="#{propietarioCuentaBean.usuario}" value="#{per}" />
+                                      </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Eliminar">
+                                      <p:commandButton value="Eliminar" icon="ui-icon-trash" oncomplete="dlgeliminar.show()">
+                                          <f:setPropertyActionListener target="#{propietarioCuentaBean.usuario}" value="#{per}" />
+                                      </p:commandButton>
+                            </p:column>      
+                    </p:dataTable>
+               <!-- </p:panel> -->
+            </h:form>
     </body>
 </html>
