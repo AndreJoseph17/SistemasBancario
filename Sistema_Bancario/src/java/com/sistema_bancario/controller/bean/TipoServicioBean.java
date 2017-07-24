@@ -6,6 +6,7 @@
 package com.sistema_bancario.controller.bean;
 
 import com.sistema_bancario.model.pojo.TipoServicio;
+import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -16,7 +17,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "tipoServicioBean")
 @ViewScoped
-public class TipoServicioBean {
+public class TipoServicioBean implements Serializable{
 
     private TipoServicio tipoServicio;
     private List<TipoServicio> tipoServicios;

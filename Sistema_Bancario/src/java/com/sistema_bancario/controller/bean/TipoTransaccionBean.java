@@ -6,6 +6,7 @@
 package com.sistema_bancario.controller.bean;
 
 import com.sistema_bancario.model.pojo.TipoTransaccion;
+import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
@@ -17,7 +18,7 @@ import javax.faces.view.ViewScoped;
  */
 @ManagedBean(name = "tipoTransaccionBean")
 @ViewScoped
-public class TipoTransaccionBean {
+public class TipoTransaccionBean  implements Serializable{
 
     private TipoTransaccion tipoTransaccion;
     private List<TipoTransaccion> tipoTransacciones;

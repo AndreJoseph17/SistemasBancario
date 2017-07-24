@@ -7,6 +7,7 @@ package com.sistema_bancario.controller.bean;
 
 import com.sistema_bancario.dao.TransaccionDAO;
 import com.sistema_bancario.model.pojo.Transaccion;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.inject.Named;
@@ -20,7 +21,7 @@ import javax.faces.view.ViewScoped;
  */
 @ManagedBean(name = "transaccionBean")
 @ViewScoped
-public class TransaccionBean {
+public class TransaccionBean implements Serializable{
 
     private Transaccion transaccion;
     private List<Transaccion> transacciones;

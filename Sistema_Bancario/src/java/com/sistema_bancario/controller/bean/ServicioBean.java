@@ -8,6 +8,7 @@ package com.sistema_bancario.controller.bean;
 import com.sistema_bancario.dao.ServicioDAO;
 import com.sistema_bancario.model.pojo.Servicio;
 import com.sistema_bancario.model.pojo.TipoServicio;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +23,7 @@ import javax.faces.view.ViewScoped;
  */
 @ManagedBean(name = "servicioBean")
 @ViewScoped
-public class ServicioBean {
+public class ServicioBean implements Serializable{
     
     
     private Servicio servicio;
