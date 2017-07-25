@@ -115,4 +115,27 @@ public class PropietarioCuentaDAO {
         }
         session.close();
     }
+    /**
+     * Método para obtener el id del usuario con login y clave
+     * @param login
+     * @param clave
+     * @return 
+     */
+    
+    public Integer getIdUsuario (String login, String clave){
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "select pc.idusuario from propietario_cuenta pc"
+                + " where pc.login = "+login+" and pc.password = "+clave;
+        Query query = session.createQuery(hql);
+        List <Integer> resultadoId = query.list();
+        Integer userId = 0;
+        if(resultadoId.get(0) != null){
+            userId = resultadoId.get(0);
+        }
+        session.flush();
+        session.close();
+        return userId;
+    }
+    
 }
