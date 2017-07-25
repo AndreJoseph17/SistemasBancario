@@ -31,8 +31,8 @@ and open the template in the editor.
                             <p:outputLabel for="txtClave" value="Clave" />
                             <p:password id="txtClave" value="#{propietarioCuentaBean.usuario.password}" required="true" feedback="true" promptLabel="Ingrese una clave"/>
                             
-                            <p:commandButton value="Iniciar Sesion" icon="ui-icon-key" update="pgLogin, mensaje" actionListener="#{propietarioCuentaBean.getIdUsuario(txtUsuario, txtClave)}"/>
-
+                            <!--<p:commandButton value="Iniciar Sesion" icon="ui-icon-key" update="pgLogin, mensaje" actionListener="#{propietarioCuentaBean.getIdUsuario}"/>
+                             !-->
                         </h:panelGrid>
                         <p:separator />
                         <p:link value="Regresar" outcome="index.xhtml"/>

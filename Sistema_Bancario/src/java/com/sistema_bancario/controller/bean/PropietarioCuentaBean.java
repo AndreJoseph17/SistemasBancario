@@ -8,6 +8,7 @@ package com.sistema_bancario.controller.bean;
 import com.sistema_bancario.dao.PropietarioCuentaDAO;
 import com.sistema_bancario.model.pojo.Cuenta;
 import com.sistema_bancario.model.pojo.PropietarioCuenta;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -100,6 +102,28 @@ public class PropietarioCuentaBean implements Serializable {
    }
    
    
+   public void getIdUsuario(ActionEvent event){
+       PropietarioCuentaDAO usuarioDao = new PropietarioCuentaDAO();
+       RequestContext context = RequestContext.getCurrentInstance();
+       FacesMessage message = null;
+       boolean loggedIn = false;
+       if(usuario.getLogin()!= null && usuario.getPassword() != null ){
+           String idusuario = usuarioDao.getIdUsuario(usuario.getLogin(), usuario.getPassword());
+           if(usuario != null){
+               loggedIn = true;
+               message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", idusuario);
+           }else {
+               loggedIn = false;
+               message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Usuario inválido");
+           }
+       }else{
+           message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Ingrese ambos campos");
+       }
+       FacesContext.getCurrentInstance().addMessage(null, message);
+       context.addCallbackParam("IngresoCorrecto", loggedIn);
+   }
+   
+   /*
    public String getIdUsuario(String login, String clave){
        String idUsuario=null;
        String redireccion=null;
@@ -113,10 +137,9 @@ public class PropietarioCuentaBean implements Serializable {
      
        }
        
-       return redireccion;
-       
-       
+       return redireccion; 
    }
+    */
    
    public String listarItems(Set<Cuenta> items){
        String cadena="";
