@@ -99,6 +99,25 @@ public class PropietarioCuentaBean implements Serializable {
        usuario=new PropietarioCuenta();
    }
    
+   
+   public String getIdUsuario(String login, String clave){
+       String idUsuario=null;
+       String redireccion=null;
+       try {
+            PropietarioCuentaDAO usuarioDao = new PropietarioCuentaDAO();
+            idUsuario=usuarioDao.getIdUsuario(login, clave);
+            redireccion="index"; 
+            return idUsuario;
+       } catch (Exception e) {
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Alerta", "Error"));
+     
+       }
+       
+       return redireccion;
+       
+       
+   }
+   
    public String listarItems(Set<Cuenta> items){
        String cadena="";
        for (Iterator<Cuenta> iterator = items.iterator(); iterator.hasNext();) {

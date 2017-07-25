@@ -32,7 +32,7 @@ public class UsuarioFacade implements UsuarioFacadeLocal{
         PropietarioCuenta propietario=null;
         String consulta;
         try {
-            consulta="SELECT p FROM PropietarioCuenta p p.propietario=1 ? and p.clave=2?";
+            consulta="SELECT p FROM PropietarioCuenta p p.propietario= ?1 and p.clave= ?2";
             Query query= em.createQuery(consulta);
             List<PropietarioCuenta> lista=query.getResultList();
             if (!lista.isEmpty()){
