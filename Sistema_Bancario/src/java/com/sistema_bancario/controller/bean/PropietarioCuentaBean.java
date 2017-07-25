@@ -8,6 +8,7 @@ package com.sistema_bancario.controller.bean;
 import com.sistema_bancario.dao.PropietarioCuentaDAO;
 import com.sistema_bancario.model.pojo.Cuenta;
 import com.sistema_bancario.model.pojo.PropietarioCuenta;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -100,6 +102,8 @@ public class PropietarioCuentaBean implements Serializable {
    }
    
    
+   
+   /*
    public String getIdUsuario(String login, String clave){
        String idUsuario=null;
        String redireccion=null;
@@ -113,10 +117,9 @@ public class PropietarioCuentaBean implements Serializable {
      
        }
        
-       return redireccion;
-       
-       
+       return redireccion; 
    }
+    */
    
    public String listarItems(Set<Cuenta> items){
        String cadena="";
