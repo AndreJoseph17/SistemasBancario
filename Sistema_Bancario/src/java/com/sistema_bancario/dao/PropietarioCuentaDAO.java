@@ -122,14 +122,14 @@ public class PropietarioCuentaDAO {
      * @return 
      */
     
-    public Integer getIdUsuario (String login, String clave){
+    public String getIdUsuario (String login, String clave){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "select pc.idusuario from propietario_cuenta pc"
                 + " where pc.login = "+login+" and pc.password = "+clave;
         Query query = session.createQuery(hql);
-        List <Integer> resultadoId = query.list();
-        Integer userId = 0;
+        List <String> resultadoId = query.list();
+        String userId = "";
         if(resultadoId.get(0) != null){
             userId = resultadoId.get(0);
         }
