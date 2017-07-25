@@ -28,18 +28,6 @@ import javax.persistence.TemporalType;
 @Table(name = "planilla", catalog = "bancodb"
 )
 
-/**
- * Mapeo de procedimiento almacenado - registrar_pago_servicio
- */
-@NamedStoredProcedureQuery(
-        name = "registrar_pago_servicio",
-        procedureName = "registrar_pago_servicio",
-        parameters = {
-            @StoredProcedureParameter(mode = ParameterMode.IN, type = Double.class, name = "valor_pagar"),
-            @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "id_planilla"),
-            @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "id_servicio"),
-            @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "id_cuenta_principal"),
-            @StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "valor_retorno")})
 
 public class Planilla implements java.io.Serializable {
 
@@ -52,10 +40,6 @@ public class Planilla implements java.io.Serializable {
     private Date fechaPago;
     private String estado;
 
-    /**
-     * Variable EntityManagerFactory para la ejecución del SP
-     */
-    private EntityManagerFactory emf;
 
     public Planilla() {
     }
@@ -152,35 +136,6 @@ public class Planilla implements java.io.Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    /**
-     * Método para cancelar servivios básicos
-     * @param valor_pagar
-     * @param id_planilla
-     * @param id_servicio
-     * @param id_cuenta_principal
-     * @return 
-     */
-
-    public Integer pago_servicio(Double valor_pagar, Integer id_planilla,
-            Integer id_servicio, Integer id_cuenta_principal) {
-        
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        
-        StoredProcedureQuery query = em.createNamedStoredProcedureQuery("registrar_pago_servicio");
-        query.setParameter("valor_pagar", valor_pagar);
-        query.setParameter("id_planilla", id_planilla);
-        query.setParameter("id_servicio", id_servicio);
-        query.setParameter("id_cuenta_principal", id_cuenta_principal);
-        query.execute();
-        
-        Integer valor_retorno = (Integer) query.getOutputParameterValue("valor_retorno");
-        
-        em.getTransaction().commit();
-        em.close();
-        
-        return valor_retorno;
-    }
+   
 
 }

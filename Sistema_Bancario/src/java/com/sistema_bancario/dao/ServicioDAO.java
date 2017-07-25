@@ -9,13 +9,34 @@ import com.sistema_bancario.model.pojo.Servicio;
 import com.sistema_bancario.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.StoredProcedureQuery;
 
 /**
  *
  * @author andre
  */
+
+/**
+ * Mapeo de procedimiento almacenado - registrar_pago_servicio
+ */
+@NamedStoredProcedureQuery(
+        name = "registrar_pago_servicio",
+        procedureName = "registrar_pago_servicio",
+        parameters = {
+            @StoredProcedureParameter(mode = ParameterMode.IN, type = Double.class, name = "valor_pagar"),
+            @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "id_planilla"),
+            @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "id_servicio"),
+            @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "id_cuenta_principal"),
+            @StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "valor_retorno")})
+
 public class ServicioDAO {
     
     private Servicio servicio;
@@ -23,6 +44,8 @@ public class ServicioDAO {
     private List<Servicio> DaoAllServicio;
     private List<Servicio> DaoSearchServiciosList;
     
+    
+
     public List<Servicio> AllServicios(){
         
         Session session = HibernateUtil.getSessionFactory().openSession();

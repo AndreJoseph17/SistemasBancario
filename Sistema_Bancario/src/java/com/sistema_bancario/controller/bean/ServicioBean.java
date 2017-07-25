@@ -28,6 +28,7 @@ public class ServicioBean implements Serializable{
     
     private Servicio servicio;
     private List<Servicio> servicios;
+    ServicioDAO servicioDao;
     /**
      * Creates a new instance of ServicioBean
      */
