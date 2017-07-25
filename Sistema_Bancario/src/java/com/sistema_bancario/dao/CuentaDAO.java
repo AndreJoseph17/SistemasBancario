@@ -40,15 +40,18 @@ public class CuentaDAO {
         return DaoAllCuentas;
     }
     
-    public List <String> listarCuentasUsuario(String idUsuario){
+    public List <Integer> listarCuentasUsuario(String idUsuario){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List <String> daoSearchList = new ArrayList<>();
+        List <Integer> daoSearchList = new ArrayList<>();
         try {
             session.beginTransaction();
             Query query = session.createQuery(" select C.idcuenta From Cuenta C where C.usuario_idusuario =: valor");
             query.setParameter("valor", idUsuario);
-            daoSearchList = query.list();
+            for (Object obj : query.list()) {
+                daoSearchList.add((Integer)obj);
+            }
+            
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
