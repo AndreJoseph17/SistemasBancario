@@ -41,6 +41,8 @@ public class TransaccionDAO {
         return DaoAllTransaccion;
     }
     
+    
+    
     /**
      * Éste proceso es para listar las transacciones 
      * @param idCuentaPrincipal

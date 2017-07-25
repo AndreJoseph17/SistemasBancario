@@ -9,6 +9,7 @@ import com.sistema_bancario.model.pojo.PropietarioCuenta;
 import com.sistema_bancario.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -125,17 +126,26 @@ public class PropietarioCuentaDAO {
     public String getIdUsuario (String login, String clave){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "select pc.idusuario from propietario_cuenta pc"
-                + " where pc.login = "+login+" and pc.password = "+clave;
-        Query query = session.createQuery(hql);
-        List <String> resultadoId = query.list();
         String userId = "";
-        if(resultadoId.get(0) != null){
-            userId = resultadoId.get(0);
+        try{
+            String hql = " select idusuario from PropietarioCuenta pc"
+                    + " where pc.login =:usuario and pc.password =:clave ";
+            
+            Query query = session.createQuery(hql);
+            query.setParameter("usuario",login);
+            query.setParameter("clave",clave);
+            List<String> lista = null;
+            lista = (List<String>)query.list();
+            userId = lista.get(0);
+            session.flush();
+            session.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
-        session.flush();
-        session.close();
+        
+        //session.close();
         return userId;
+        
     }
     
 }
