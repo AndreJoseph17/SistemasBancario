@@ -40,14 +40,14 @@ public class CuentaDAO {
         return DaoAllCuentas;
     }
     
-    public List <Cuenta> SearchBy(String campo, String valor){
+    public List <String> listarCuentasUsuario(String idUsuario){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List <Cuenta> daoSearchList = new ArrayList<>();
+        List <String> daoSearchList = new ArrayList<>();
         try {
             session.beginTransaction();
-            Query query = session.createQuery("From Cuenta C where C."+campo+" =: valor");
-            query.setParameter("valor", valor);
+            Query query = session.createQuery(" select C.idcuenta From Cuenta C where C.usuario_idusuario =: valor");
+            query.setParameter("valor", idUsuario);
             daoSearchList = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
