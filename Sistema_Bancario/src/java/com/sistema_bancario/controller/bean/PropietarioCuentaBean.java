@@ -102,26 +102,6 @@ public class PropietarioCuentaBean implements Serializable {
    }
    
    
-   public void getIdUsuario(ActionEvent event){
-       PropietarioCuentaDAO usuarioDao = new PropietarioCuentaDAO();
-       RequestContext context = RequestContext.getCurrentInstance();
-       FacesMessage message = null;
-       boolean loggedIn = false;
-       if(usuario.getLogin()!= null && usuario.getPassword() != null ){
-           String idusuario = usuarioDao.getIdUsuario(usuario.getLogin(), usuario.getPassword());
-           if(usuario != null){
-               loggedIn = true;
-               message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", idusuario);
-           }else {
-               loggedIn = false;
-               message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Usuario inválido");
-           }
-       }else{
-           message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Ingrese ambos campos");
-       }
-       FacesContext.getCurrentInstance().addMessage(null, message);
-       context.addCallbackParam("IngresoCorrecto", loggedIn);
-   }
    
    /*
    public String getIdUsuario(String login, String clave){

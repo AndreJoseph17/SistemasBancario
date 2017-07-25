@@ -26,13 +26,14 @@ and open the template in the editor.
                         <h:panelGrid columns="2" id="pgLogin">
 
                             <p:outputLabel for="txtUsuario" value="Usuario" />
-                            <p:inputText id="txtUsuario" value="#{propietarioCuentaBean.usuario.login}" required="true"/>
+                            <p:inputText id="txtUsuario" value="#{loginBean.login}" required="true"/>
 
                             <p:outputLabel for="txtClave" value="Clave" />
-                            <p:password id="txtClave" value="#{propietarioCuentaBean.usuario.password}" required="true" feedback="true" promptLabel="Ingrese una clave"/>
-                            
-                            <!--<p:commandButton value="Iniciar Sesion" icon="ui-icon-key" update="pgLogin, mensaje" actionListener="#{propietarioCuentaBean.getIdUsuario}"/>
-                             !-->
+                            <p:password id="txtClave" value="#{loginBean.password}" required="true" feedback="true" promptLabel="Ingrese una clave"/>
+                            <f:facet name="footer">
+                                <p:commandButton value="Iniciar Sesion" icon="ui-icon-key" actionListener="#{loginBean.getIdUsuario}"/>
+                                
+                            </f:facet>
                         </h:panelGrid>
                         <p:separator />
                         <p:link value="Regresar" outcome="index.xhtml"/>
